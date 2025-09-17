@@ -7,6 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [cli, server, combined]
+        target: [bun-darwin-arm64, bun-windows-x64, bun-linux-x64]
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -16,8 +20,13 @@ jobs:
         with:
           bun-version: canary
 
+      - name: Bun install
+        run: bun install
+
       - name: Compile
-        run: ./compile-all.sh
+        run: |
+          cd {{ matrix.app }}
+          bun build --compile --minify --sourcemap --target {{ matrix.target }} --outdir ../out/{{ matrix.app }}-{{ matrix.target }}
 
       - name: Print output
         run: |
