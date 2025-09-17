@@ -25,8 +25,8 @@ jobs:
 
       - name: Compile
         run: |
-          cd {{ matrix.app }}
-          bun build --compile --minify --sourcemap --target {{ matrix.target }} --outdir ../out/{{ matrix.app }}-{{ matrix.target }}
+          cd ${{ matrix.app }}
+          bun build --compile --minify --sourcemap --target ${{ matrix.target }} --outdir ../out/${{ matrix.app }}-${{ matrix.target }}
 
       - name: Print output
         run: |
