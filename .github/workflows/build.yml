@@ -26,7 +26,7 @@ jobs:
       - name: Compile
         run: |
           cd ${{ matrix.app }}
-          bun build --compile --minify --sourcemap --target ${{ matrix.target }} --outdir ../out/${{ matrix.app }}-${{ matrix.target }} src/entrypoint.ts
+          bun build --compile --minify --sourcemap --target ${{ matrix.target }} --outfile ../out/${{ matrix.app }}-${{ matrix.target }} src/entrypoint.ts
 
       - name: Print output
         run: |
