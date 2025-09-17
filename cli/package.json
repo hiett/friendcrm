@@ -1,0 +1,20 @@
+{
+  "name": "@friendcrm/cli",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "executable": "bun build --compile --minify --sourcemap  --outfile ../out/friendcrm src/entrypoint.ts"
+  },
+  "dependencies": {
+    "@friendcrm/protos": "*",
+    "commander": "^14.0.0",
+    "dayjs": "^1.11.18",
+    "js-yaml": "^4.1.0",
+    "nice-grpc": "^2.1.12",
+    "zod": "^4.1.8"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
+  }
+}

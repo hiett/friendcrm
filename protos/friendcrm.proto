@@ -1,0 +1,18 @@
+syntax = "proto3";
+package friendcrm;
+
+//import "google/protobuf/empty.proto";
+//import "google/protobuf/timestamp.proto";
+import "messages.proto";
+
+service FriendCRM {
+  rpc AddFriend(Friend) returns (Friend);
+  rpc UpdateFriend(Friend) returns (Friend);
+  rpc ListFriends(ListFriendsRequest) returns (ListFriendsResponse);
+
+  // Birthdays Features //
+  rpc BirthdaysSoon(BirthdaysSoonRequest) returns (ListFriendsResponse);
+
+  // Interactions Features //
+  rpc ReconnectSoon(ReconnectSoonRequest) returns (ReconnectSoonResponse);
+}

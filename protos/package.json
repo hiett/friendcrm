@@ -1,0 +1,20 @@
+{
+  "name": "@friendcrm/protos",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "compile": "bun compile.ts"
+  },
+  "dependencies": {
+    "long": "^5.3.2",
+    "nice-grpc": "^2.1.12",
+    "protobufjs": "^7.5.4"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.13.0",
+    "ts-proto": "^2.7.7"
+  }
+}

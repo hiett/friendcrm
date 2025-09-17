@@ -1,0 +1,48 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package friendcrm;
+
+message FriendInteraction {
+  reserved 1;
+
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp date = 4;
+  repeated string tags = 5;
+}
+
+message Friend {
+  string id = 1;
+  string name = 2;
+  string knowsBecause = 3;
+  google.protobuf.Timestamp since = 4;
+  google.protobuf.Timestamp birthday = 5;
+  repeated string facts = 6;
+  repeated FriendInteraction interactions = 7;
+}
+
+message ListFriendsRequest {
+  string nameFilter = 1;
+}
+
+message ListFriendsResponse {
+  repeated Friend friends = 1;
+}
+
+message BirthdaysSoonRequest {
+  int32 daysAhead = 1;
+}
+
+message ReconnectSoonRequest {
+  int32 minDaysSinceLastInteraction = 1;
+}
+
+message ReconnectSuggestion {
+  Friend friend = 1;
+  int32 daysSinceLastInteraction = 2; // -1 if no interactions
+}
+
+message ReconnectSoonResponse {
+  repeated ReconnectSuggestion suggestions = 1;
+}
