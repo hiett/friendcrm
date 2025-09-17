@@ -3,7 +3,7 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "executable": "bun build --compile --minify --sourcemap  --outfile ../out/friendcrm-combined src/index.ts"
+    "executable": "bun build --compile --minify --sourcemap  --outfile ../out/friendcrm-combined src/entrypoint.ts"
   },
   "dependencies": {
     "nice-grpc": "^2.1.12"

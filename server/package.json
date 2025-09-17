@@ -6,8 +6,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "dev": "bun --watch src/server.ts",
-    "executable": "bun build --compile --minify --sourcemap  --outfile ../out/friendcrm-server src/server.ts"
+    "dev": "bun --watch src/entrypoint.ts",
+    "executable": "bun build --compile --minify --sourcemap  --outfile ../out/friendcrm-server src/entrypoint.ts"
   },
   "dependencies": {
     "@friendcrm/protos": "*",
