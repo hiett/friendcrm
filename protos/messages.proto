@@ -46,3 +46,7 @@ message ReconnectSuggestion {
 message ReconnectSoonResponse {
   repeated ReconnectSuggestion suggestions = 1;
 }
+
+message RemoveFriendRequest {
+  string id = 1;
+}

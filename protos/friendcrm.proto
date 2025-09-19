@@ -8,6 +8,7 @@ import "messages.proto";
 service FriendCRM {
   rpc AddFriend(Friend) returns (Friend);
   rpc UpdateFriend(Friend) returns (Friend);
+  rpc RemoveFriend(RemoveFriendRequest) returns (Friend);
   rpc ListFriends(ListFriendsRequest) returns (ListFriendsResponse);
 
   // Birthdays Features //

@@ -96,6 +96,30 @@ program
   });
 
 program
+  .command("remove")
+  .aliases(["delete"])
+  .description("Remove a friend")
+  .argument("<name>", "Name of the friend to remove")
+  .action(async (name: string) => {
+    const selected = await findFriend(name);
+    if (!selected) {
+      console.log("nothing found :(");
+      return;
+    }
+
+    const confirm = prompt(
+      `Are you sure you want to remove ${selected.name}? (y/N) `,
+    );
+    if (confirm?.toLowerCase() !== "y") {
+      console.log("Aborted.");
+      return;
+    }
+
+    await getFriendClient().removeFriend({ id: selected.id! });
+    console.log(`Removed ${selected.name}`);
+  });
+
+program
   .command("find")
   .aliases(["get", "search"])
   .description("Finds a friend based on string criteria")
@@ -109,6 +133,27 @@ program
     }
 
     console.log(printFriendToString(selected, options.json ? "json" : "yaml"));
+  });
+
+program
+  .command("list")
+  .description("List all friends")
+  .option("--json", "Output as JSON", await isJsonDefault())
+  .action(async (options: { json: boolean }) => {
+    const items = await getFriendClient().listFriends({});
+
+    if (options.json) {
+      console.log(
+        JSON.stringify(
+          items.friends.map((f) => JSON.parse(printFriendToString(f, "json"))),
+        ),
+      );
+      return;
+    }
+
+    console.log(
+      items.friends.map((f) => printFriendToString(f, "yaml")).join("\n---\n"),
+    );
   });
 
 export * from "./config.ts";

@@ -2,9 +2,10 @@ import { z } from "zod";
 
 const configSchema = z.object({
   serverAddress: z
-    .url({
-      protocol: new RegExp("^(grpc|grpcs)$"),
-    })
+    // .url({
+    //   protocol: new RegExp("^(grpc|grpcs)$"),
+    // })
+    .string()
     .default("localhost:50051"),
   defaultFormat: z.enum(["json", "yaml"]).default("yaml"),
   combinedDataPath: z.string().optional(),

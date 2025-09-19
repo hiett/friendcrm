@@ -3,7 +3,7 @@ import { addDefinitions } from "./definitions.ts";
 import { setDriver } from "./storage/loader.ts";
 import { FSStorageDriver } from "./storage/driver/fs.ts";
 
-setDriver(new FSStorageDriver("./data"));
+await setDriver(new FSStorageDriver("./data"));
 
 const server = createServer();
 addDefinitions(server);

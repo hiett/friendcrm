@@ -105,7 +105,6 @@ export class FSStorageDriver extends StorageDriver {
   }
 
   private async writeFriend(path: string, message: friendcrm.Friend) {
-    console.log(`Writing friend to path ${path}`);
     await this.writeProto(path, (writer) => {
       friendcrm.Friend.encode(message, writer);
     });

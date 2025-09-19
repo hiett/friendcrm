@@ -13,6 +13,7 @@ import {
   ListFriendsResponse,
   ReconnectSoonRequest,
   ReconnectSoonResponse,
+  RemoveFriendRequest,
 } from "./messages";
 
 export type FriendCRMDefinition = typeof FriendCRMDefinition;
@@ -31,6 +32,14 @@ export const FriendCRMDefinition = {
     updateFriend: {
       name: "UpdateFriend",
       requestType: Friend,
+      requestStream: false,
+      responseType: Friend,
+      responseStream: false,
+      options: {},
+    },
+    removeFriend: {
+      name: "RemoveFriend",
+      requestType: RemoveFriendRequest,
       requestStream: false,
       responseType: Friend,
       responseStream: false,
@@ -68,6 +77,7 @@ export const FriendCRMDefinition = {
 export interface FriendCRMServiceImplementation<CallContextExt = {}> {
   addFriend(request: Friend, context: CallContext & CallContextExt): Promise<DeepPartial<Friend>>;
   updateFriend(request: Friend, context: CallContext & CallContextExt): Promise<DeepPartial<Friend>>;
+  removeFriend(request: RemoveFriendRequest, context: CallContext & CallContextExt): Promise<DeepPartial<Friend>>;
   listFriends(
     request: ListFriendsRequest,
     context: CallContext & CallContextExt,
@@ -87,6 +97,7 @@ export interface FriendCRMServiceImplementation<CallContextExt = {}> {
 export interface FriendCRMClient<CallOptionsExt = {}> {
   addFriend(request: DeepPartial<Friend>, options?: CallOptions & CallOptionsExt): Promise<Friend>;
   updateFriend(request: DeepPartial<Friend>, options?: CallOptions & CallOptionsExt): Promise<Friend>;
+  removeFriend(request: DeepPartial<RemoveFriendRequest>, options?: CallOptions & CallOptionsExt): Promise<Friend>;
   listFriends(
     request: DeepPartial<ListFriendsRequest>,
     options?: CallOptions & CallOptionsExt,

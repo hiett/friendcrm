@@ -10,10 +10,11 @@ export function getDriver(): StorageDriver {
   return driver;
 }
 
-export function setDriver(newDriver: StorageDriver) {
+export async function setDriver(newDriver: StorageDriver) {
   if (driver) {
     throw new Error("Driver already set");
   }
 
   driver = newDriver;
+  await driver.init();
 }

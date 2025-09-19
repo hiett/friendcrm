@@ -53,6 +53,10 @@ export interface ReconnectSoonResponse {
   suggestions: ReconnectSuggestion[];
 }
 
+export interface RemoveFriendRequest {
+  id: string;
+}
+
 function createBaseFriendInteraction(): FriendInteraction {
   return { title: "", description: "", date: undefined, tags: [] };
 }
@@ -695,6 +699,64 @@ export const ReconnectSoonResponse: MessageFns<ReconnectSoonResponse> = {
   fromPartial(object: DeepPartial<ReconnectSoonResponse>): ReconnectSoonResponse {
     const message = createBaseReconnectSoonResponse();
     message.suggestions = object.suggestions?.map((e) => ReconnectSuggestion.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseRemoveFriendRequest(): RemoveFriendRequest {
+  return { id: "" };
+}
+
+export const RemoveFriendRequest: MessageFns<RemoveFriendRequest> = {
+  encode(message: RemoveFriendRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RemoveFriendRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRemoveFriendRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RemoveFriendRequest {
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
+  },
+
+  toJSON(message: RemoveFriendRequest): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<RemoveFriendRequest>): RemoveFriendRequest {
+    return RemoveFriendRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<RemoveFriendRequest>): RemoveFriendRequest {
+    const message = createBaseRemoveFriendRequest();
+    message.id = object.id ?? "";
     return message;
   },
 };

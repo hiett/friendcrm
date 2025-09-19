@@ -3,7 +3,7 @@ import { addDefinitions, FSStorageDriver, setDriver } from "@friendcrm/server";
 import { getConfig, runProgram } from "@friendcrm/cli";
 
 const config = await getConfig();
-setDriver(new FSStorageDriver(config.combinedDataPath ?? "./data"));
+await setDriver(new FSStorageDriver(config.combinedDataPath ?? "./data"));
 const server = createServer();
 addDefinitions(server);
 

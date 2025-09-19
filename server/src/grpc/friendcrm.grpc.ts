@@ -14,6 +14,14 @@ export const friendcrmImpl: friendcrm.FriendCRMServiceImplementation = {
 
     return result;
   },
+  async removeFriend(request) {
+    const result = await getDriver().removeFriend(request.id);
+    if (!result) {
+      throw new Error(`Friend with ID ${request.id} not found`);
+    }
+
+    return result;
+  },
   async listFriends(request) {
     return {
       friends: await getDriver().listFriends(request),
